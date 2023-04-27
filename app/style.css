@@ -1,0 +1,71 @@
+:root {
+    --hand-size: 400px;
+}
+
+body {
+    background: url("fur.jpg") no-repeat fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    user-select: none;
+    cursor: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.hand {
+    --shadow-width: calc(var(--hand-size) / 30);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--hand-size);
+    height: auto;
+    filter: drop-shadow(var(--shadow-width) var(--shadow-width) #00000075);
+}
+
+.hand-active {
+    --shadow-width: calc(var(--hand-size) / 50);
+}
+
+.status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background:  #00000090;
+    padding: 3px 10px 5px 8px;
+    color: #fff;
+    font-weight: bold;
+    font-family: arial, sans-serif;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 0;
+}
+
+.status::before {
+    width: 14px;
+    height: 14px;
+    background: orangered;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    content: "";
+    position: relative;
+    top: 2px;
+}
+
+.status::after {
+    content: "not connected"
+}
+
+.status-active::before {
+    background: limegreen;
+}
+
+.status-active::after {
+    content: "connected"
+}
