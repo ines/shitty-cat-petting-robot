@@ -101,8 +101,8 @@ class Controller:
         self.pwm = Driver(0x40, debug=debug_driver)
         self.pwm.set_pwm_freq(50)
         self.debug = debug
-        self.default_pos = default
-        self.position = default
+        self.default_pos = dict(default)
+        self.position = dict(default)
         self.reset()
 
     def _get_degree(self, deg: int) -> int:
