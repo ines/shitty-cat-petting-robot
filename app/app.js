@@ -1,8 +1,6 @@
 const statusEl = document.querySelector('.status')
 const handEl = document.querySelector('.hand')
 const handRect = handEl.getBoundingClientRect()
-const statusActiveClass = 'status-active'
-const handActiveClass = 'hand-active'
 
 let moved = null
 let start = null
@@ -10,8 +8,8 @@ let start = null
 
 window.addEventListener('DOMContentLoaded', () => {
     fetch('/health').then(res => {
-        if (res.status == 200) {
-            statusEl.classList.add(statusActiveClass)
+        if (res.ok) {
+            statusEl.classList.add('status-active')
         }
     })
 })
@@ -19,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('mousedown', event => {
     moved = null
     start = event.clientX
-    handEl.classList.add(handActiveClass)
+    handEl.classList.add('hand-active')
 })
 
 window.addEventListener('mousemove', event => {
@@ -30,15 +28,13 @@ window.addEventListener('mousemove', event => {
 
 window.addEventListener('mouseup', event => {
     if (moved != null) {
-        handEl.classList.remove(handActiveClass)
+        handEl.classList.remove('hand-active')
         const end = event.clientX
         if (start != end) {
-            const trueStart = start < end ? start : end
-            const trueEnd = start < end ? end : start
             const width = document.body.clientWidth
             const data = {
-                start: trueStart / width,
-                end: trueEnd / width,
+                start: (start < end ? start : end) / width,
+                end: (start < end ? end : start) / width,
             }
             fetch('/pet', {
                 method: 'POST', body: JSON.stringify(data), headers: {

@@ -12,7 +12,6 @@ from .driver import Controller
 class Instructions(BaseModel):
     start: float
     end: float
-    speed: int
 
 
 static_path = Path(__file__).parent.parent / "app"
@@ -30,10 +29,10 @@ app.add_middleware(
 
 @app.post("/pet")
 def pet(data: Instructions) -> None:
-    ctrl.set("rotate", int(45 + data.start * 90))
-    ctrl.move("y", -40)
-    ctrl.move("rotate", int(data.end * 90))
-    ctrl.move("y", 40)
+    ctrl.set("rotate", int(45 + data.start * 90))  # rotate to start position
+    ctrl.move("y", -40)  # lower arm
+    ctrl.move("rotate", int(data.end * 90))  # rotate to end position
+    ctrl.move("y", 40)  # move arm back up
 
 
 @app.get("/health")
