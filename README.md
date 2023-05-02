@@ -14,6 +14,6 @@ This robot is not fit for purpose at all and guaranteed to make your cats run aw
 ## Running the app
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 uvicorn server.app:app --reload
 ```
